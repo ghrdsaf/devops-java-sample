@@ -9,6 +9,7 @@ pipeline {
         string(name:'TAG_NAME',defaultValue: '',description:'')
     }
 
+
     environment {
         DOCKER_CREDENTIAL_ID = 'aliyunhub-id'
         GITHUB_CREDENTIAL_ID = 'gitee-id'
