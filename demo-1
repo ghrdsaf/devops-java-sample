@@ -42,12 +42,6 @@ podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
           '''
       }
 
-    stage ('checkout scm') {
-            steps {
-                checkout(scm)
-            }
-        }
- 
     stage ('unit test') {
             steps {
                 container ('maven') {
