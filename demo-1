@@ -43,7 +43,7 @@ podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
       }
 
     stage ('unit test') {
-                 sh 'mvn clean  -gs `pwd`/configuration/settings.xml test'
+//                 sh 'mvn clean  -gs `pwd`/configuration/settings.xml test'
             }
      stage ('build & push') {
                     sh 'mvn  -Dmaven.test.skip=true -gs `pwd`/configuration/settings.xml clean package'
