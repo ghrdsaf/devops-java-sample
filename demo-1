@@ -1,11 +1,10 @@
-  podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
+podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
     containerTemplate(
-        name: 'maven', 
+        name: 'jnlp', 
         image: 'registry.cn-hangzhou.aliyuncs.com/liuyik8s/jenkins-slave:1.0', 
         alwaysPullImage: false
     ),
   ],
- 
   volumes: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
     hostPathVolume(mountPath: '/usr/bin/docker', hostPath: '/usr/bin/docker'),
@@ -13,6 +12,12 @@
     hostPathVolume(mountPath: '/usr/local/maven', hostPath: '/usr/local/maven'),
    ],
   ) 
+{
+ node("jnlp-slave"){
+      stage('Git Checkout'){
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitee-id', url: 'ihttps://gitee.com/liuyik8s/devops-java-sample.git']]])
+      }
+
     parameters {
         string(name:'TAG_NAME',defaultValue: '',description:'')
     }
@@ -62,3 +67,5 @@
                 }
             }
         }
+     }
+}
