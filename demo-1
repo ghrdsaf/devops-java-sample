@@ -15,7 +15,7 @@ podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
 {
  node("jnlp-slave"){
       stage('Git Checkout'){
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitee-id', url: 'ihttps://gitee.com/liuyik8s/devops-java-sample.git']]])
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB_CREDENTIAL_ID', url: 'https://gitee.com/liuyik8s/devops-java-sample.git']]])
       }
 
     parameters {
