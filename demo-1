@@ -1,17 +1,18 @@
-podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
+  podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
     containerTemplate(
         name: 'maven', 
         image: 'registry.cn-hangzhou.aliyuncs.com/liuyik8s/jenkins-slave:1.0', 
         alwaysPullImage: false
     ),
   ],
+ 
   volumes: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
     hostPathVolume(mountPath: '/usr/bin/docker', hostPath: '/usr/bin/docker'),
     hostPathVolume(mountPath: '/usr/local/jdk', hostPath: '/usr/local/jdk'),
     hostPathVolume(mountPath: '/usr/local/maven', hostPath: '/usr/local/maven'),
-  ],
-) 
+   ],
+  ) 
     parameters {
         string(name:'TAG_NAME',defaultValue: '',description:'')
     }
@@ -26,7 +27,6 @@ podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
         APP_NAME = 'devops-java-sample'
     }
 
-
     stage('checking'){
           sh '''
           docker ps
@@ -37,22 +37,20 @@ podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
           '''
       }
 
-    stages {
-        stage ('checkout scm') {
+    stage ('checkout scm') {
             steps {
                 checkout(scm)
             }
         }
-   }
  
-      stage ('unit test') {
+    stage ('unit test') {
             steps {
                 container ('maven') {
                  sh 'mvn clean  -gs `pwd`/configuration/settings.xml test'
                 }
             }
-        }
-       stage ('build & push') {
+      }
+     stage ('build & push') {
             steps {
                 container ('maven') {
                     sh 'mvn  -Dmaven.test.skip=true -gs `pwd`/configuration/settings.xml clean package'
