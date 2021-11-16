@@ -1,9 +1,49 @@
-pipeline {
-  agent {
-    node {
-      label 'slave-maven'
+podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', containers: [
+    containerTemplate(
+        name: 'maven', 
+        image: 'registry.cn-hangzhou.aliyuncs.com/liuyik8s/jenkins-slave:1.0', 
+        alwaysPullImage: false
+    ),
+  ],
+  volumes: [
+    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
+    hostPathVolume(mountPath: '/usr/bin/docker', hostPath: '/usr/bin/docker'),
+    hostPathVolume(mountPath: '/usr/local/jdk', hostPath: '/usr/local/jdk'),
+    hostPathVolume(mountPath: '/usr/local/maven', hostPath: '/usr/local/maven'),
+  ],
+) 
+    parameters {
+        string(name:'TAG_NAME',defaultValue: '',description:'')
     }
-  }
+
+    environment {
+        DOCKER_CREDENTIAL_ID = 'aliyunhub-id'
+        GITHUB_CREDENTIAL_ID = 'gitee-id'
+        KUBECONFIG_CREDENTIAL_ID = 'demo-kubeconfig'
+        REGISTRY = 'aliyun.com registry.cn-hangzhou.aliyuncs.com'
+        DOCKERHUB_NAMESPACE = 'liuyik8s'
+        GITHUB_ACCOUNT = 'liuyik8s'
+        APP_NAME = 'devops-java-sample'
+    }
+
+{
+  node("jnlp-slave"){
+      stage('Git Checkout'){
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitee-id', url: 'https://gitee.com/liuyik8s/devops-java-sample.git']]])
+      }
+      stage('checking'){
+          sh '''
+          docker ps
+          docker info
+          pwd
+          ls -l
+          sleep 2
+          '''
+      }
+      stage('Unit Testing'){
+        echo "Unit Testing..."
+      }
+
 
     parameters {
         string(name:'TAG_NAME',defaultValue: '',description:'')
@@ -100,4 +140,3 @@ pipeline {
           }
         }
     }
-}
