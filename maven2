@@ -29,6 +29,7 @@ pipeline {
             steps {
                 sh '''
                 pwd
+                echo "webhook"
                 ls -l
                 sleep 2
                 '''
