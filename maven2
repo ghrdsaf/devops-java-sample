@@ -27,7 +27,7 @@ pipeline {
             }
         }
  
-/*        stage('checking'){
+        stage('checking'){
             steps {
                 sh '''
                 pwd
@@ -79,8 +79,8 @@ pipeline {
                   sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:latest '
                 }
            }
-        }
-   */ 
+       }
+ 
        stage('deploy to dev') {
           when{
             branch 'master'
