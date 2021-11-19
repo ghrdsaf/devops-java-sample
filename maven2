@@ -104,7 +104,8 @@ pipeline {
 */ 
              sh "sleep 1"
              sh "cat deploy/dev-ol/*.yaml"
-             sh 'kubectl apply -f deploy/dev-ol'
+             sh 'kubectl apply -f deploy/dev-ol/devops-sample-svc.yaml'
+             sh 'kubectl apply -f deploy/dev-ol/devops-sample.yaml'
            }
           }
         }
