@@ -81,7 +81,6 @@ pipeline {
     
 }
 
-  stages('deploy'){
        stage('deploy to dev') {
           when{
             branch 'master'
@@ -124,6 +123,5 @@ pipeline {
             kubernetesDeploy(configs: 'deploy/prod-ol/**', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
           }
         }
-    }
 }
 
