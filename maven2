@@ -94,7 +94,7 @@ pipeline {
             expression{
               return params.TAG_NAME =~ /v.*/
             }
-          }
+           }
           steps {
               container ('maven') {
                 input(id: 'release-image-with-tag', message: 'release image with tag?')
