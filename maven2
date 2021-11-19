@@ -33,6 +33,7 @@ pipeline {
                 echo "webhook"
                 ls -l
                 sleep 2
+                echo "$[app]"
                 '''
             }    
       }
