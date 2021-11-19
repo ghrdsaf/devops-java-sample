@@ -25,7 +25,7 @@ pipeline {
             }
         }
  
-        stage('checking'){
+/*        stage('checking'){
             steps {
                 sh '''
                 pwd
@@ -78,7 +78,7 @@ pipeline {
                 }
            }
         }
-    
+   */ 
        stage('deploy to dev') {
           when{
             branch 'master'
