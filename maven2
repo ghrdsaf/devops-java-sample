@@ -93,7 +93,7 @@ pipeline {
               sh "cat deploy/dev-ol/*.yaml"
               sh "sleep 6"i*/
 
-              withKubeConfig([credentialsId: 'kube-id') {
+              withKubeConfig([credentialsId: 'kube-id']) {
                    sh "cat deploy/dev-ol/*.yaml"
                    sh 'kubectl apply -f deploy/dev-ol/*'
                    sh "ls -l deploy/dev-ol"
