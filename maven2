@@ -89,6 +89,7 @@ pipeline {
           //    kubernetesDeploy(configs: 'deploy/dev-ol/**', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
               sh "ls -l deploy/dev-ol"
               sh "cat deploy/dev-ol/*.yaml"
+              sh "sleep 600"
               sh "kubectl apply -f deploy/dev-ol/*"
           }
         }
