@@ -81,7 +81,7 @@ pipeline {
     
 }
 
-  stages(‘deploy’){
+  stages('deploy'){
        stage('deploy to dev') {
           when{
             branch 'master'
