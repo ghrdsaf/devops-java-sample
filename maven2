@@ -86,6 +86,7 @@ pipeline {
             branch 'master'
           }
           steps {
+             container ('maven'){
        //     input(id: 'deploy-to-dev', message: 'deploy to dev?')
               sh "ls -l deploy/dev-ol"
               sh "sleep 600"
@@ -102,6 +103,7 @@ pipeline {
                }
 */ 
              sh "sleep 6"
+           }
           }
         }
 
