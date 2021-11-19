@@ -2,7 +2,8 @@ pipeline {
  agent {
    label 'maven'
   }
-    parameters { 
+    
+   parameters { 
         string(name: 'BUILD_NUMBER',defaultValue: '1.0',description: '')
         string(name: 'APP_NAME',defaultValue: 'devops-sample',description: '')
     }
