@@ -86,7 +86,8 @@ pipeline {
           steps {
        //     input(id: 'deploy-to-dev', message: 'deploy to dev?')
        //     kubernetesDeploy(configs: 'deploy/dev-ol/**', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
-              sh "kubectl apply -f ideploy/dev-ol/*"
+              sh "ls -l deploy/dev-ol"
+              sh "kubectl apply -f deploy/dev-ol/*"
           }
         }
 
