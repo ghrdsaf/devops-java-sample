@@ -92,8 +92,9 @@ pipeline {
               sh "cat deploy/dev-ol/*.yaml"
               sh "sleep 6"
               withKubeConfig([credentialsId: 'kube-id', serverUrl: 'https://192.168.65.98:6443']) {
-                   sh 'kubectl apply -f deploy/dev-ol'
+                   sh 'kubectl apply -f deploy/dev-ol/*'
               }
+              sh "sleep 6"
           }
         }
 
