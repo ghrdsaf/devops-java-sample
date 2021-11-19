@@ -88,7 +88,7 @@ pipeline {
        //     input(id: 'deploy-to-dev', message: 'deploy to dev?')
               sh "ls -l deploy/dev-ol"
            //   kubernetesDeploy configs: 'deploy/dev-ol/**', kubeConfig: [path: ''], kubeconfigId: 'demo-kubeconfig', secretName: 'aliyun', secretNamespace: 'jenkins-k8s', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
-       //       kubernetesDeploy(configs: 'deploy/dev-ol/**', enableConfigSubstitution: false, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
+              kubernetesDeploy(configs: 'deploy/dev-ol/**', enableConfigSubstitution: false, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
               sh "ls -l deploy/dev-ol"
               sh "cat deploy/dev-ol/*.yaml"
               sh "sleep 6"
