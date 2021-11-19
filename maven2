@@ -85,17 +85,19 @@ pipeline {
             branch 'master'
           }
           steps {
-       //     input(id: 'deploy-to-dev', message: 'deploy to dev?')
+       /*     input(id: 'deploy-to-dev', message: 'deploy to dev?')
               sh "ls -l deploy/dev-ol"
               kubernetesDeploy configs: 'deploy/dev-ol/**', kubeConfig: [path: ''], kubeconfigId: 'demo-kubeconfig', secretName: 'aliyun', secretNamespace: 'jenkins-k8s', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://192.168.65.98:6443']
-           //   kubernetesDeploy(configs: 'deploy/dev-ol/**', enableConfigSubstitution: false, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
+              kubernetesDeploy(configs: 'deploy/dev-ol/**', enableConfigSubstitution: false, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
               sh "ls -l deploy/dev-ol"
               sh "cat deploy/dev-ol/*.yaml"
-              sh "sleep 6"
-              withKubeConfig([credentialsId: 'kube-id', serverUrl: 'https://192.168.65.98:6443']) {
+              sh "sleep 6"i*/
+
+              withKubeConfig([credentialsId: 'kube-id') {
+                   sh "cat deploy/dev-ol/*.yaml"
                    sh 'kubectl apply -f deploy/dev-ol/*'
                    sh "ls -l deploy/dev-ol"
-              }
+               }
               sh "sleep 6"
           }
         }
