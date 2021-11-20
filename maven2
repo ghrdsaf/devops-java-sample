@@ -82,8 +82,6 @@ pipeline {
                 }
            }
        }
-   }
-    stages('CICD'){
       
        stage('deploy to dev') {
           when{
