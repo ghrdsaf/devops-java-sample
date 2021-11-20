@@ -6,7 +6,7 @@ pipeline {
     
    parameters { 
         string(name: 'BUILD_NUMBER',defaultValue: '1.0',description: '')
-        string(name: 'APP_NAME',defaultValue: 'devops-sample',description: '')
+        string(name: 'APP_NAME',defaultValue: 'devops-java-sample',description: '')
     }
 
     environment {
@@ -101,7 +101,16 @@ pipeline {
                    sh 'kubectl apply -f deploy/dev-ol/*'
                    sh "ls -l deploy/dev-ol"
                }
-*/ 
+*/
+             sh ...
+             echo "changing parameter"
+             sed -i 's/<BUILD_NUMBER>/${BUILD_NUMBER}/' deploy/dev-ol/devops-sample.yaml
+
+             sed -i 's/<REGISTRY>/${REGISTRY}/' deploy/dev-ol/devops-sample.yaml
+             sed -i 's/<DOCKERHUB_NAMESPACE>/${DOCKERHUB_NAMESPACE}/' deploy/dev-ol/devops-sample.yaml
+             sed -i 's/<APP_NAME>/${APP_NAME}/' deploy/dev-ol/devops-sample.yaml
+             sed -i 's/<BRANCH_NAME>/${BRANCH_NAME}/' deploy/dev-ol/devops-sample.yaml
+             ...
              sh "sleep 1"
              sh "cat deploy/dev-ol/*.yaml"
              sh 'kubectl apply -f deploy/dev-ol/devops-sample-svc.yaml'
