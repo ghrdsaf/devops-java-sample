@@ -18,7 +18,6 @@ pipeline {
         DOCKERHUB_NAMESPACE = 'liuyik8s'
         GITEE_ACCOUNT = 'liuyik8s'
         BRANCH_NAME = 'master'
-//        TAG_NAME = &BUILD_NUMBER
         }
 
     stages {
@@ -83,7 +82,9 @@ pipeline {
                 }
            }
        }
- 
+   }
+    stages('CICD'){
+      
        stage('deploy to dev') {
           when{
             branch 'master'
