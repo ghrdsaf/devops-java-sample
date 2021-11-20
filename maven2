@@ -136,6 +136,7 @@ pipeline {
        stage('deploy to production') {
        
           steps {
+           container ('maven') {
             input(id: 'deploy-to-production', message: 'deploy to production?')
              sh 'kubectl delete -f k8s.yaml -n production'
              sh "sleep 10"
@@ -143,7 +144,7 @@ pipeline {
              sh 'kubectl apply -f k8s.yaml -n production'
           }
         }
-
+     }
 
     }
 
