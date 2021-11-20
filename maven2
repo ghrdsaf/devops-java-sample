@@ -7,7 +7,7 @@ pipeline {
    parameters { 
         string(name: 'BUILD_NUMBER',defaultValue: '1.0',description: '')
         string(name: 'TAG_NAME',defaultValue: '1.0',description: '')
-        choice choices: ['gateway', 'order', 'product'], name: 'APP_NAME'
+        choice choices: ['devops-java-sample', 'gateway', 'order', 'product'], name: 'APP_NAME'
     }
 
     environment {
