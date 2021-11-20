@@ -115,8 +115,8 @@ pipeline {
              '''
              sh "sleep 1"
              sh "cat k8s.yaml"
-             sh 'kubectl apply -f deploy/dev-ol/devops-sample-svc.yaml'
-             sh 'kubectl apply -f k8s.yaml'
+             sh 'kubectl apply -f k8s.yaml -n testing'
+             sh 'kubectl apply -f k8s.yaml -n production'
            }
           }
         }

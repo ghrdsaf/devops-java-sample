@@ -1,26 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: APP_NAME 
+  name: APP_NAME
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 30861
+  selector:
+    app: APP_NAME 
+  sessionAffinity: None
+  type: NodePort
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: kubesphere
-    component: ks-sample-dev
-    tier: backend
-  name: ks-sample-dev
-  namespace: testing
+    app: APP_NAME 
+  name: APP_NAME
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   selector:
     matchLabels:
-      app: kubesphere
-      component: ks-sample-dev
-      tier: backend
+      app: APP_NAME 
   template:
     metadata:
       labels:
-        app: kubesphere
-        component: ks-sample-dev
-        tier: backend
+        app: APP_NAME 
     spec:
       containers:
         - env:
