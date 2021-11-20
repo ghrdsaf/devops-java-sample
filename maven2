@@ -147,20 +147,14 @@ pipeline {
         }
  
        stage('deploy to production') {
-         when{
-            expression{
-              return params.TAG_NAME =~ /v.
-            }
-          }
-
+       
           steps {
             input(id: 'deploy-to-production', message: 'deploy to production?')
              sh 'kubectl delete -f k8s.yaml -n production'
              sh "sleep 10"
              sh "cat k8s.yaml"
              sh 'kubectl apply -f k8s.yaml -n production'
-           // kubernetesDeploy(configs: 'deploy/prod-ol/**', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
           }
         }
-}
+    }
 }
