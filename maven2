@@ -124,11 +124,11 @@ pipeline {
         }
 
         stage('push with tag'){
-          /*when{
+         when{
             expression{
-              return params.TAG_NAME =~ /v.*/
+              return params.TAG_NAME =~ /v.
             }
-           }*/
+           }
           
             steps {
               container ('maven') {
