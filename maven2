@@ -7,7 +7,7 @@ pipeline {
    parameters { 
         string(name: 'BUILD_NUMBER',defaultValue: '1.0',description: '')
         string(name: 'TAG_NAME',defaultValue: '1.0',description: '')
-        string(name: 'APP_NAME',defaultValue: 'devops-java-sample',description: '')
+        choice choices: ['gateway', 'order', 'product'], name: 'APP_NAME'
     }
 
     environment {
@@ -41,6 +41,7 @@ pipeline {
                 '''
             }    
       }
+
         stage('Unit Testing'){
           steps {
             echo "Unit Testing..."
@@ -69,7 +70,7 @@ pipeline {
                     }
                 }
             }
-     }
+        }
     
         stage('push latest'){
            when{
@@ -126,10 +127,10 @@ pipeline {
               container ('maven') {
          //       input(id: 'release-image-with-tag', message: 'release image with tag?')
                   withCredentials([usernamePassword(credentialsId: "$GITHUB_CREDENTIAL_ID", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh 'git config --global user.email "kubesphere@yunify.com" '
-                    sh 'git config --global user.name "kubesphere" '
+                    sh 'git config --global user.email "liuyi71@sina.com" '
+                    sh 'git config --global user.name "liuyi71k8s" '
                     sh 'git tag -a $TAG_NAME -m "$TAG_NAME" '
-                    sh 'git push http://$GIT_USERNAME:$GIT_PASSWORD@gitee.com/$GITHUB_ACCOUNT/devops-java-sample.git --tags --ipv4'
+                    sh 'git push http://$GIT_USERNAME:$GIT_PASSWORD@gitee.com/$GITHUB_ACCOUNT/$APP_NAME.git --tags --ipv4'
                     }
             
                   sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
@@ -148,5 +149,9 @@ pipeline {
              sh 'kubectl apply -f k8s.yaml -n production'
           }
         }
+
+
     }
+
+
 }
