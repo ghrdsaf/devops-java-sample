@@ -102,19 +102,20 @@ pipeline {
                    sh "ls -l deploy/dev-ol"
                }
 */
-             sh ...
+             sh '''
              echo "changing parameter"
-             sed -i 's/<BUILD_NUMBER>/${BUILD_NUMBER}/' deploy/dev-ol/devops-sample.yaml
+             cp deploy/dev-ol/devops-sample.yaml k8s.yaml
+             sed -i 's/<BUILD_NUMBER>/${BUILD_NUMBER}/' k8s.yaml
 
-             sed -i 's/<REGISTRY>/${REGISTRY}/' deploy/dev-ol/devops-sample.yaml
-             sed -i 's/<DOCKERHUB_NAMESPACE>/${DOCKERHUB_NAMESPACE}/' deploy/dev-ol/devops-sample.yaml
-             sed -i 's/<APP_NAME>/${APP_NAME}/' deploy/dev-ol/devops-sample.yaml
-             sed -i 's/<BRANCH_NAME>/${BRANCH_NAME}/' deploy/dev-ol/devops-sample.yaml
-             ...
+             sed -i 's/<REGISTRY>/${REGISTRY}/' k8s.yaml
+             sed -i 's/<DOCKERHUB_NAMESPACE>/${DOCKERHUB_NAMESPACE}/' k8s.yaml
+             sed -i 's/<APP_NAME>/${APP_NAME}/' k8s.yaml
+             sed -i 's/<BRANCH_NAME>/${BRANCH_NAME}/' k8s.yaml
+             '''
              sh "sleep 1"
-             sh "cat deploy/dev-ol/*.yaml"
+             sh "cat k8s.yaml"
              sh 'kubectl apply -f deploy/dev-ol/devops-sample-svc.yaml'
-             sh 'kubectl apply -f deploy/dev-ol/devops-sample.yaml'
+             sh 'kubectl apply -f k8s.yaml'
            }
           }
         }
