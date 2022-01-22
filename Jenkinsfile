@@ -137,7 +137,7 @@ pipeline {
           steps {
            container ('maven') {
             input(id: 'deploy-to-production', message: 'deploy to production?')
-    //      sh 'kubectl delete -f k8s.yaml -n production'
+           // sh 'kubectl delete -f k8s.yaml -n production'
              sh "env"
              sh "sleep 10"
              sh "cat k8s.yaml"
