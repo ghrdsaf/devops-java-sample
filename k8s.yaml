@@ -56,3 +56,25 @@ spec:
       terminationGracePeriodSeconds: 30
       imagePullSecrets:
       - name: aliyunhub
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kubesphere
+    component: ks-sample-dev
+    tier: backend
+  name: ks-sample-dev
+  namespace: testing
+spec:
+  ports:
+  - port: 9000
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: kubesphere
+    component: ks-sample-dev
+    tier: backend
+status:
+  loadBalancer: {}
