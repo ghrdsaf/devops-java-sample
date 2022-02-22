@@ -14,6 +14,6 @@ public class HelloWorldController {
 
     @RequestMapping("/")
     public String sayHello() {
-        return "Really appreciate your star ppp, that's the power of our life. I change it today";
+        return "today is 20220222, we are sucessful to run pipeline";
     }
 }
