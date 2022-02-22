@@ -106,7 +106,7 @@ pipeline {
              sed -i "s#BRANCH_NAME#$BRANCH_NAME#g" k8s.yaml
 
              '''
-             sh 'kubectl delete -f k8s.yaml -n testing'
+           //  sh 'kubectl delete -f k8s.yaml -n testing'
              sh "sleep 10"
              sh "cat k8s.yaml"
              sh 'kubectl apply -f k8s.yaml -n testing'
