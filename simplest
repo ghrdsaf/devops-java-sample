@@ -1,7 +1,7 @@
 pipeline
 {
 agent {
-  label 'test'
+  label 'maven'
 }
 
     stages {
